@@ -18,7 +18,20 @@ $(document).ready(function() {
             alertPassword.removeClass('none');
         }
         if (flag) {
-
+            $.post('/users/login', { username, password }, function(data) {
+                if (data.state == 0) {
+                    $('#alert-success').html('登陆成功，即将跳转').removeClass('none');
+                    setTimeout(() => {
+                        window.location.href = '/repository';
+                    }, 800);
+                } else if (data.state == 1 || data.state == 3) {
+                    alertPassword.html(data.message);
+                    alertPassword.removeClass('none');
+                } else if (data.state == 2) {
+                    alertUsername.html(data.message);
+                    alertUsername.removeClass('none');
+                }
+            }, 'json');
         }
 
     })
