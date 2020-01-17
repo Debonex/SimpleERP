@@ -1,5 +1,10 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block links
+    link(rel="stylesheet", href="css/index.css")
+
+block body
+    body
+        #main-container
+            .box#login-box
+                .box-title 登陆

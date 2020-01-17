@@ -1,0 +1,14 @@
+#main-container {
+    background: url('/images/bg-regist.png') top center no-repeat;
+    background-color: rgb(57, 134, 172);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-box {
+    padding: 20px;
+    width: 400px;
+    height: 200px;
+}
