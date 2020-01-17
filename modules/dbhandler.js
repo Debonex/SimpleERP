@@ -9,7 +9,7 @@ connection.connect();
 var methods = {
     addUser(user) {
         var password = cryption.aesEncrypt(user.password, config.aeskey);
-        var sql = 'insert into users (username,password) values (\'' + user.username + '\',\'' + password + '\')';
+        var sql = 'insert into users (username,password,priority) values (\'' + user.username + '\',\'' + password + '\',\'' + user.priority + '\')';
         connection.query(sql);
     },
     getUserByUsername(username, callback) {
