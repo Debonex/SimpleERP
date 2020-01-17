@@ -2,9 +2,7 @@ extends layout
 
 block links
     link(rel="stylesheet", href="css/index.css")
-    link(rel="stylesheet", href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css")
-    link(rel="stylesheet", href="css/bootstrap.min.css")
-    script(src="js/bootstrap.min.js")
+    script(src="js/index.js")
 
 block body
     body
@@ -17,11 +15,13 @@ block body
                             .input-group-prepend
                                 span.input-group-text#icon-username.fa.fa-user
                             input.form-control#input-username(type='text',placeholder='请输入用户名',aria-describedby="icon-username")
+                        .alert.alert-warning.none#alert-username
                     .form-line
                         .input-group
                             .input-group-prepend
                                 span.input-group-text#icon-password.fa.fa-lock
-                            input.form-control#input-username(type='password',placeholder='请输入密码',aria-describedby="icon-password")
+                            input.form-control#input-password(type='password',placeholder='请输入密码',aria-describedby="icon-password")
+                        .alert.alert-warning.none#alert-password
                     .form-line
                         button.btn.btn-block#button-login 登陆
 

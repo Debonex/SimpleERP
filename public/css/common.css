@@ -13,6 +13,19 @@ a {
     color: #ffffff;
 }
 
+a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.none {
+    display: none;
+}
+
 .box {
     background: #fff;
     border-radius: 3px;
@@ -27,19 +40,19 @@ a {
 }
 
 .navigator {
-    padding-left: 40px;
+    padding-left: 2rem;
     position: fixed;
     top: 0px;
     z-index: 999;
-    height: 50px;
+    height: 3.4rem;
     width: 100%;
     background-color: rgb(57, 134, 172);
     display: flex;
 }
 
 .navigator-item {
-    margin-left: 40px;
-    margin-top: 16px;
+    margin-left: 0.75rem;
+    margin-top: 0.9rem;
 }
 
 .navigator-item:hover .navigator-item-items {
@@ -47,10 +60,10 @@ a {
 }
 
 .navigator-item-items {
-    width: 93px;
-    margin-top: 16px;
-    margin-left: -30px;
-    padding: 0px 0px 10px 30px;
+    width: 8rem;
+    margin-top: 1rem;
+    margin-left: -1.8rem;
+    padding: 0px 0px 1rem 1.8rem;
     background-color: rgb(57, 134, 172);
     visibility: hidden;
 }

@@ -8,12 +8,16 @@
 }
 
 #login-box {
-    padding: 20px;
-    width: 400px;
+    padding: 1.5rem;
+    width: 24rem;
 }
 
 .form-line {
-    margin: 30px 0;
+    margin: 2rem 0;
+}
+
+.alert {
+    padding: 0.25rem 1.25rem;
 }
 
 #button-login {
