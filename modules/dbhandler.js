@@ -32,6 +32,16 @@ var methods = {
                 callback(result[0].num);
             }
         });
+    },
+    getRepositorys(callback) {
+        var sql = 'select * from repository';
+        connection.query(sql, function(err, result) {
+            if (err) {
+                console.error(err.stack);
+            } else {
+                callback(result[0]);
+            }
+        })
     }
 };
 

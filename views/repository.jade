@@ -1,3 +1,26 @@
 extends layout-navigator
 
+block links
+    link(rel="stylesheet", href="css/tables.css")
+    link(rel="stylesheet", href="css/repository.css")
+    script(src="js/repository.js")
+
 block content
+    #main-container
+        #table-container
+            table
+                thead
+                    tr
+                        th 商品编号
+                        th 品牌名称
+                        th 商品全名
+                        th 型号
+                        th 等级
+                        th 规格
+                        th 数量
+                        th 成本均价
+                        th 成本金额
+                        th 入库时间
+                        th 批次编号
+                        th 备注
+                tbody#table-body
