@@ -6,9 +6,11 @@ var logger = require('morgan');
 var session = require('express-session');
 var config = require('./modules/configure');
 
+//view routers
 var indexRouter = require('./routes/index');
 var repositoryRouter = require('./routes/repository');
 var usersRouter = require('./routes/users');
+var generalRouter = require('./routes/general');
 
 var app = express();
 
@@ -27,9 +29,13 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//set view routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/general', generalRouter);
 app.use('/repository', repositoryRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

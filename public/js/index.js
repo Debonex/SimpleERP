@@ -22,7 +22,7 @@ $(document).ready(function() {
                 if (data.state == 0) {
                     $('#alert-success').html('登陆成功，即将跳转').removeClass('none');
                     setTimeout(() => {
-                        window.location.href = '/repository';
+                        window.location.href = '/general';
                     }, 800);
                 } else if (data.state == 1 || data.state == 3) {
                     alertPassword.html(data.message);
