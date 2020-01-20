@@ -8,7 +8,7 @@ block links
 block content
     .secondary-navigator
         .btn-group
-            button.btn.btn-tools 入库
+            button.btn.btn-tools(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
             button.btn.btn-tools 出库
     #main-container
         #table-container
@@ -28,4 +28,15 @@ block content
                         th 批次编号
                         th 备注
                 tbody#table-body
+    .modal#modal-repository-in(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5.modal-title 入库单
+                    button.close(type='button',data-dismiss='modal',aria-label='Close')
+                        span x
+                .modal-body ...
+                .modal-footer
+                    button.btn.btn-secondary(type='button',data-dismiss='modal') 取消
+                    button.btn.btn-primary(type='button') 确认
     

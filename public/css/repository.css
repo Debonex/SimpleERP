@@ -9,14 +9,28 @@
     width: 80%;
 }
 
+.modal {
+    top: 25%;
+}
+
 
 /* 屏幕宽度小于400px的适配样式 */
 
-@media screen and (max-device-width: 550px) {
+@media screen and (max-device-width: 576px) {
     #main-container {
         width: max-content;
     }
     #table-container {
         width: 100%;
+    }
+    .modal {
+        top: 0;
+        left: 10%;
+    }
+    .modal-content {
+        width: 25rem;
+    }
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0);
     }
 }
