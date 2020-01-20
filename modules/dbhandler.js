@@ -39,7 +39,7 @@ var methods = {
             if (err) {
                 console.error(err.stack);
             } else {
-                callback(result[0]);
+                callback(result);
             }
         })
     }

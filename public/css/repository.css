@@ -1,26 +1,22 @@
-/* 屏幕宽度小于400px的适配样式 */
-
-@media screen and (max-device-width: 400px) {
-    #main-container {
-        width: max-content;
-        margin: 3.4rem 0rem;
-        display: flex;
-        justify-content: center;
-    }
-    #table-container {
-        margin-top: 2rem;
-        width: 100%;
-    }
+#main-container {
+    margin: 6.4rem 0rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
-@media screen and (min-device-width: 400px) {
+#table-container {
+    width: 80%;
+}
+
+
+/* 屏幕宽度小于400px的适配样式 */
+
+@media screen and (max-device-width: 550px) {
     #main-container {
-        margin: 3.4rem 0rem;
-        display: flex;
-        justify-content: center;
+        width: max-content;
     }
     #table-container {
-        margin-top: 2rem;
-        width: 80%;
+        width: 100%;
     }
 }

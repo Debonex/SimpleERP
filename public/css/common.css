@@ -39,15 +39,30 @@ a:hover {
     border-bottom: 2px solid rgb(57, 134, 172);
 }
 
+.a-current {
+    border-bottom: 2px solid #fdfdfd;
+    font-weight: bolder;
+}
+
 .navigator {
     padding-left: 2rem;
     position: fixed;
-    top: 0px;
+    top: 0rem;
     z-index: 999;
     height: 3.4rem;
     width: 100%;
-    background-color: rgb(57, 134, 172);
+    background-image: linear-gradient(rgb(57, 134, 172), rgba(57, 134, 172, 0.7));
     display: flex;
+}
+
+.secondary-navigator {
+    padding-left: 2rem;
+    position: fixed;
+    top: 3.4rem;
+    z-index: 999;
+    height: 3rem;
+    width: 100%;
+    background-image: linear-gradient(rgba(57, 134, 172, 0.7), rgba(228, 231, 234, 0.4));
 }
 
 .navigator-item {
@@ -60,6 +75,7 @@ a:hover {
 }
 
 .navigator-item-items {
+    z-index: 1000;
     width: 8rem;
     margin-top: 1rem;
     margin-left: -1.8rem;
@@ -70,4 +86,15 @@ a:hover {
 
 .navigator-item-item {
     margin-top: 10px;
+}
+
+.btn-tools {
+    color: #fff;
+    background-color: #4798b3;
+    padding: 0.075rem 0.5rem;
+}
+
+.btn-tools:hover {
+    color: #fff;
+    background-color: #57a2c7;
 }

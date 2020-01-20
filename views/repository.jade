@@ -6,6 +6,10 @@ block links
     script(src="js/repository.js")
 
 block content
+    .secondary-navigator
+        .btn-group
+            button.btn.btn-tools 入库
+            button.btn.btn-tools 出库
     #main-container
         #table-container
             table
@@ -20,7 +24,8 @@ block content
                         th 数量
                         th 成本均价
                         th 成本金额
-                        th 入库时间
+                        th 入库日期
                         th 批次编号
                         th 备注
                 tbody#table-body
+    
