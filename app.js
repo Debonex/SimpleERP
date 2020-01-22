@@ -9,8 +9,10 @@ var config = require('./modules/configure');
 //view routers
 var indexRouter = require('./routes/index');
 var repositoryRouter = require('./routes/repository');
+var repositoryInRouter = require('./routes/repository-in');
 var usersRouter = require('./routes/users');
 var generalRouter = require('./routes/general');
+
 
 var app = express();
 
@@ -35,6 +37,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/general', generalRouter);
 app.use('/repository', repositoryRouter);
+app.use('/repository-in', repositoryInRouter);
 
 
 // catch 404 and forward to error handler

@@ -1,26 +1,30 @@
-table {
+.table-container table {
     width: 100%;
     border: 0;
 }
 
-th {
+.table-container th {
     background-color: #008080;
     color: #fdfdfd;
     width: max-content;
 }
 
-th,
-td {
+.table-container th,
+.table-container td {
     font-size: 0.95em;
     text-align: center;
     padding: 4px;
     border-collapse: collapse;
 }
 
-tr:nth-child(odd) {
+.table-container tr {
+    height: 1.55rem;
+}
+
+.table-container tr:nth-child(odd) {
     background-color: #fdfdfd;
 }
 
-tr:nth-child(even) {
+.table-container tr:nth-child(even) {
     background-color: #c0e5dc;
 }

@@ -8,10 +8,10 @@ block links
 block content
     .secondary-navigator
         .btn-group
-            button.btn.btn-tools(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
-            button.btn.btn-tools 出库
+            button.btn.btn-primary.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
+            button.btn.btn-primary.btn-sm 出库
     #main-container
-        #table-container
+        .table-container
             table
                 thead
                     tr
@@ -33,10 +33,56 @@ block content
             .modal-content
                 .modal-header
                     h5.modal-title 入库单
-                    button.close(type='button',data-dismiss='modal',aria-label='Close')
+                    button.close.close-in(type='button',data-dismiss='modal',aria-label='Close')
                         span x
-                .modal-body ...
+                .modal-body
+                    .alert.alert-warning.none#alert-in
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-tags
+                        select.custom-select#select-brand
+                            option(selected) 选择品牌
+                            option(value="a") 博德瓷砖
+                        select.cutom-select#select-level
+                            option(selected) 选择等级
+                            option(value='0') 优
+                            option(value='1') 良
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-gears
+                        input.form-control#input-id(type='text',placeholder='商品编号')
+                        input.form-control#input-fullname(type='text',placeholder='商品全名')
+                        input.form-control#input-type(type='text',placeholder='型号')
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text 规格
+                        input.form-control#input-width(type='text',placeholder='宽度')
+                        .input-group-append
+                            .input-group-text *
+                        input.form-control#input-height(type='text',placeholder='高度')
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-sort-numeric-asc
+                        input.form-control#input-num(type='text',placeholder='数量(片)')
+                        .input-group-append
+                            .input-group-text.fa.fa-shopping-basket
+                        input.form-control#input-costsum(type='text',placeholder='成本价(元)')
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-reorder
+                        input.form-control#input-remark(type='text',placeholder='备注')
+                    button.btn.btn-primary(type='button')#btn-add 添加商品
+                    button.btn.btn-secondary(type='button')#btn-clear 清空
+                    table.table
+                        thead
+                            tr
+                                th 商品编号
+                                th 商品全名
+                                th 数量
+                                th 成本金额
+                                th 操作
+                        tbody#table-in-body
                 .modal-footer
-                    button.btn.btn-secondary(type='button',data-dismiss='modal') 取消
+                    button.btn.btn-secondary.close-in(type='button',data-dismiss='modal') 取消
                     button.btn.btn-primary(type='button') 确认
     

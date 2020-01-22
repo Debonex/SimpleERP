@@ -6,11 +6,23 @@
 }
 
 #table-container {
-    width: 80%;
+    width: 90%;
 }
 
 .modal {
-    top: 25%;
+    top: 5%;
+}
+
+.modal .input-group {
+    margin-top: 0.75rem;
+}
+
+#btn-add {
+    margin: 0.7rem auto 0.7rem auto;
+}
+
+#btn-clear {
+    margin-left: 1.2rem;
 }
 
 
@@ -25,10 +37,10 @@
     }
     .modal {
         top: 0;
-        left: 10%;
+        left: 3.8%;
     }
     .modal-content {
-        width: 25rem;
+        width: 35rem;
     }
     .modal-backdrop {
         background-color: rgba(0, 0, 0, 0);
