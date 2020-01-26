@@ -8,9 +8,11 @@ block links
 block content
     .secondary-navigator
         .btn-group
+            button.btn.btn-primary.btn-sm#btn-commodity-add(data-toggle='modal',data-target='#modal-commodity-add',data-backdrop='static') 添加商品
             button.btn.btn-primary.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
             button.btn.btn-primary.btn-sm 出库
     #main-container
+        .alert.alert-success.invisible#alert-main
         .table-container
             table
                 thead
@@ -24,42 +26,24 @@ block content
                         th 数量
                         th 成本均价
                         th 成本金额
-                        th 入库日期
-                        th 批次编号
+                        th 最后入库时间
                         th 备注
                 tbody#table-body
+
+    //- 入库单modal
     .modal#modal-repository-in(tabindex='-1')
         .modal-dialog
             .modal-content
                 .modal-header
                     h5.modal-title 入库单
                     button.close.close-in(type='button',data-dismiss='modal',aria-label='Close')
-                        span x
+                        span &times
                 .modal-body
                     .alert.alert-warning.none#alert-in
                     .input-group
                         .input-group-prepend
-                            .input-group-text.fa.fa-tags
-                        select.custom-select#select-brand
-                            option(selected) 选择品牌
-                            option(value="a") 博德瓷砖
-                        select.cutom-select#select-level
-                            option(selected) 选择等级
-                            option(value='0') 优
-                            option(value='1') 良
-                    .input-group
-                        .input-group-prepend
                             .input-group-text.fa.fa-gears
                         input.form-control#input-id(type='text',placeholder='商品编号')
-                        input.form-control#input-fullname(type='text',placeholder='商品全名')
-                        input.form-control#input-type(type='text',placeholder='型号')
-                    .input-group
-                        .input-group-prepend
-                            .input-group-text 规格
-                        input.form-control#input-width(type='text',placeholder='宽度')
-                        .input-group-append
-                            .input-group-text *
-                        input.form-control#input-height(type='text',placeholder='高度')
                     .input-group
                         .input-group-prepend
                             .input-group-text.fa.fa-sort-numeric-asc
@@ -71,18 +55,57 @@ block content
                         .input-group-prepend
                             .input-group-text.fa.fa-reorder
                         input.form-control#input-remark(type='text',placeholder='备注')
-                    button.btn.btn-primary(type='button')#btn-add 添加商品
-                    button.btn.btn-secondary(type='button')#btn-clear 清空
+                    button.btn.btn-primary(type='button')#btn-in-add 添加入库项
+                    button.btn.btn-secondary(type='button')#btn-in-clear 清空
                     table.table
                         thead
                             tr
                                 th 商品编号
-                                th 商品全名
-                                th 数量
-                                th 成本金额
+                                th 数量(片)
+                                th 成本金额(元)
                                 th 操作
                         tbody#table-in-body
                 .modal-footer
+                    button.btn.btn-danger#btn-in-realclear(type='button') 清空入库单
                     button.btn.btn-secondary.close-in(type='button',data-dismiss='modal') 取消
-                    button.btn.btn-primary(type='button') 确认
-    
+                    button.btn.btn-primary#btn-in-confirm(type='button') 提交
+    //- 添加商品modal
+    .modal#modal-commodity-add(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5.modal-title 新增商品
+                    button.close.close-commodity-add(type='button',data-dismiss='modal',aria-label='Close')
+                        span &times
+                .modal-body
+                    .alert.alert-warning.none#alert-commodity-add
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-tags
+                        select.custom-select#select-commodity-brand
+                            option(selected) 选择品牌
+                        select.cutom-select#select-commodity-level
+                            option(selected) 选择等级
+                            option(value='0') 优
+                            option(value='1') 良
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-gears
+                        input.form-control#input-commodity-id(type='text',placeholder='商品编号')
+                        input.form-control#input-commodity-fullname(type='text',placeholder='商品全名')
+                        input.form-control#input-commodity-type(type='text',placeholder='型号')
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text 规格
+                        input.form-control#input-commodity-width(type='text',placeholder='宽度')
+                        .input-group-append
+                            .input-group-text *
+                        input.form-control#input-commodity-height(type='text',placeholder='高度')
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-reorder
+                        input.form-control#input-commodity-remark(type='text',placeholder='备注')
+                .modal-footer         
+                    button.btn.btn-secondary.close-commodity-add(type='button',data-dismiss='modal') 取消
+                    button.btn.btn-secondary(type='button')#btn-commodity-clear 清空
+                    button.btn.btn-primary(type='button')#btn-commodity-confirm 确认

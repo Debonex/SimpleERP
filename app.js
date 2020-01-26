@@ -10,6 +10,7 @@ var config = require('./modules/configure');
 var indexRouter = require('./routes/index');
 var repositoryRouter = require('./routes/repository');
 var repositoryInRouter = require('./routes/repository-in');
+var brandsRouter = require('./routes/brands');
 var usersRouter = require('./routes/users');
 var generalRouter = require('./routes/general');
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/general', generalRouter);
+app.use('/brands', brandsRouter);
 app.use('/repository', repositoryRouter);
 app.use('/repository-in', repositoryInRouter);
 

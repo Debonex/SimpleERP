@@ -6,9 +6,9 @@ function formatDate(input) {
     const hour = dateTime.getHours();
     const minute = dateTime.getMinutes();
     const second = dateTime.getSeconds();
-    return (year + 1) + '-' + month + '-' + date + ' ' + addzero(hour) + ':' + addzero(minute) + ':' + addzero(second);
+    return (year) + '-' + month + '-' + date + ' ' + addzero(hour) + ':' + addzero(minute) + ':' + addzero(second);
 }
 
 function addzero(time) {
-    return time == 0 ? '00' : '0';
+    return time > 9 ? time : '0' + time;
 }

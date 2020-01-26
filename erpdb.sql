@@ -26,6 +26,7 @@ CREATE TABLE `repository` (
   `repositoryid` varchar(12) NOT NULL,
   `brand` varchar(45) NOT NULL,
   `fullname` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
   `level` varchar(4) NOT NULL,
   `width` int(11) NOT NULL,
   `height` int(11) NOT NULL,
@@ -36,7 +37,7 @@ CREATE TABLE `repository` (
   `remark` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`repositoryid`),
   UNIQUE KEY `id_UNIQUE` (`repositoryid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +46,7 @@ CREATE TABLE `repository` (
 
 LOCK TABLES `repository` WRITE;
 /*!40000 ALTER TABLE `repository` DISABLE KEYS */;
+INSERT INTO `repository` VALUES ('010101','博德','八度空间大理石瓷砖','ATTDB01','优',800,800,100,7000,'2019-01-19',1,'第一批货'),('010102','博德','八度空间大理石瓷砖','ATTDB02','优',900,900,40,2030,'2019-01-19',1,'第一批货');
 /*!40000 ALTER TABLE `repository` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,14 +59,14 @@ DROP TABLE IF EXISTS `users`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(16) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `username` varchar(16) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(32) CHARACTER SET latin1 NOT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `priority` int(11) NOT NULL,
   PRIMARY KEY (`username`,`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,4 +88,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-19 23:33:33
+-- Dump completed on 2020-01-22 14:36:32

@@ -17,12 +17,18 @@
     margin-top: 0.75rem;
 }
 
-#btn-add {
+#btn-in-add {
     margin: 0.7rem auto 0.7rem auto;
 }
 
-#btn-clear {
+#btn-in-clear {
     margin-left: 1.2rem;
+}
+
+#alert-main {
+    position: fixed;
+    top: 0.5rem;
+    z-index: 1001;
 }
 
 
