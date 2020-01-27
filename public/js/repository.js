@@ -4,7 +4,7 @@ $(document).ready(function() {
     var repositoryInList = [];
     var repositoryOutList = [];
     //指定导航栏的当前标签
-    $('#a-repository').addClass('a-current');
+    $('#a-repository').addClass('active');
 
     //获取所有的仓库信息
     getRepositories();

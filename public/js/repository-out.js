@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#a-repository-out').addClass('a-current');
+    $('#a-repository-out').addClass('active');
 
     getRepositoryout();
 });

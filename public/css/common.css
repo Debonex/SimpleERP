@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    width: 100%;
     height: 100%;
     background-color: rgb(228, 231, 234);
     margin: 0px;
@@ -44,48 +45,11 @@ a:hover {
     font-weight: bolder;
 }
 
-.navigator {
-    padding-left: 2rem;
-    position: fixed;
-    top: 0rem;
-    z-index: 999;
-    height: 3.4rem;
-    width: 100%;
-    background-image: linear-gradient(rgb(57, 134, 172), rgba(57, 134, 172, 0.7));
-    display: flex;
-}
-
-.secondary-navigator {
-    padding-left: 2rem;
-    position: fixed;
-    top: 3.4rem;
-    z-index: 999;
-    height: 3rem;
-    width: 100%;
-    background-image: linear-gradient(rgba(57, 134, 172, 0.7), rgba(228, 231, 234, 0.4));
-}
-
-.navigator-item {
-    margin-left: 0.75rem;
-    margin-top: 0.9rem;
-}
-
-.navigator-item:hover .navigator-item-items {
-    visibility: initial;
-}
-
-.navigator-item-items {
-    z-index: 1000;
-    width: 8rem;
-    margin-top: 1rem;
-    margin-left: -1.8rem;
-    padding: 0px 0px 1rem 1.8rem;
-    background-color: rgb(57, 134, 172);
-    visibility: hidden;
-}
-
-.navigator-item-item {
-    margin-top: 10px;
+.navigator-secondary {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    justify-content: start;
 }
 
 .btn-tools {
@@ -97,4 +61,10 @@ a:hover {
 .btn-tools:hover {
     color: #fff;
     background-color: #57a2c7;
+}
+
+@media screen and (max-device-width: 576px) {
+    html {
+        width: min-content;
+    }
 }

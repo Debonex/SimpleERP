@@ -5,19 +5,20 @@ block links
     link(rel="stylesheet", href="css/repository.css")
     script(src="js/repository.js")
 
-block secondary-navigator
-    .btn-group
-        button.btn.btn-primary.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
-        button.btn.btn-primary.btn-sm#btn-out(data-toggle='modal',data-target='#modal-repository-out',data-backdrop='static') 出库
-    .btn-group#btn-group-secondary
-        button.btn.btn-primary.btn-sm#btn-commodity-add(data-toggle='modal',data-target='#modal-commodity-add',data-backdrop='static') 添加商品
-        button.btn.btn-primary.btn-sm#btn-brand-add(data-toggle='modal',data-target='#modal-brand-add',data-backdrop='static') 添加品牌
+block navigator-secondary
+    nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.navigator-secondary.flex-row  
+        .btn-group
+            button.btn.btn-primary.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
+            button.btn.btn-primary.btn-sm#btn-out(data-toggle='modal',data-target='#modal-repository-out',data-backdrop='static') 出库
+        .btn-group#btn-group-secondary
+            button.btn.btn-primary.btn-sm#btn-commodity-add(data-toggle='modal',data-target='#modal-commodity-add',data-backdrop='static') 添加商品
+            button.btn.btn-primary.btn-sm#btn-brand-add(data-toggle='modal',data-target='#modal-brand-add',data-backdrop='static') 添加品牌
 
 block content
     #main-container
         .alert.alert-success.invisible#alert-main
         .table-container
-            table
+            table.table.table-striped
                 thead
                     tr
                         th 商品编号
@@ -32,6 +33,7 @@ block content
                         th 最后变更时间
                         th 备注
                 tbody#table-body
+    
 
     //- 入库单modal
     .modal#modal-repository-in(tabindex='-1')

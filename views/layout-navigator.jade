@@ -2,15 +2,16 @@ extends layout
 
 block body
   body
-    .navigator
-      .navigator-item
-        a(href="/general")#a-general 首页
-      .navigator-item
-        a(href="/repository")#a-repository 仓库管理
-      .navigator-item
-        a(href="/repository-in")#a-repository-in 入库明细
-      .navigator-item
-        a(href='/repository-out')#a-repository-out 出库明细
-    .secondary-navigator
-      block secondary-navigator
+    nav.navbar.navbar-expand.navbar-dark.bg-dark.sticky-top.flex-row  
+      .navbar-nav-scroll
+        ul.navbar-nav
+          li.nav-item
+            a.nav-link#a-general(href="/general") 首页
+          li.nav-item
+            a.nav-link#a-repository(href="/repository") 仓库管理
+          li.nav-item
+            a.nav-link#a-repository-in(href="/repository-in") 入库明细
+          li.nav-item
+            a.nav-link#a-repository-out(href="/repository-out") 出库明细
+    block navigator-secondary
     block content

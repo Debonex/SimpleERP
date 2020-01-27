@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#a-repository-in').addClass('a-current');
+    $('#a-repository-in').addClass('active');
 
     getRepositoryin();
 });

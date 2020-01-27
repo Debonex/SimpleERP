@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $('#a-general').addClass('a-current');
+    $('#a-general').addClass('active');
 });
