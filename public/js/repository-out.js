@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    $('#a-repository-in').addClass('a-current');
+    $('#a-repository-out').addClass('a-current');
 
-    getRepositoryin();
+    getRepositoryout();
 });
 
 function renderTable(list) {
@@ -18,10 +18,10 @@ function renderTable(list) {
         table += '<td>' + item.type + '</td>';
         table += '<td>' + item.level + '</td>';
         table += '<td>' + item.width + '*' + item.height + '</td>';
+        table += '<td>' + item.num_pre + '</td>';
         table += '<td>' + item.num + '</td>';
-        table += '<td>' + (item.num == 0 ? '0' : (item.costsum / item.num).toFixed(2)) + '</td>';
-        table += '<td>' + item.costsum + '</td>';
-        table += '<td>' + formatDate(item.intime) + '</td>';
+        table += '<td>' + item.num_after + '</td>';
+        table += '<td>' + formatDate(item.outtime) + '</td>';
         table += '<td>' + item.remark + '</td>';
         table += '</tr>';
     }
@@ -31,10 +31,10 @@ function renderTable(list) {
         table += '</tr>';
     }
     $('#table-body').html(table);
-};
+}
 
-function getRepositoryin() {
-    $.get('/repository-in/getall', {}, function(res) {
+function getRepositoryout() {
+    $.get('/repository-out/getall', {}, function(res) {
         renderTable(res);
     });
 }

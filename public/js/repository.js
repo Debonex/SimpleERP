@@ -2,6 +2,7 @@ const rePositiveInt = /^[0-9]*[1-9][0-9]*$/;
 const renonNegativeFloat = /^\d+(\.\d+)?$/;
 $(document).ready(function() {
     var repositoryInList = [];
+    var repositoryOutList = [];
     //指定导航栏的当前标签
     $('#a-repository').addClass('a-current');
 
@@ -23,12 +24,23 @@ $(document).ready(function() {
 
     //清空modal
     $('#btn-in-clear').bind('click', function() {
+        $('#alert-in').addClass('none');
         inClearInputAndSelect();
     });
     $('#btn-in-realclear').bind('click', function() {
+        $('#alert-in').addClass('none');
         inClearForm();
         repositoryInList = [];
-    })
+    });
+    $('#btn-out-clear').bind('click', function() {
+        $('#alert-out').addClass('none');
+        outClearInput();
+    });
+    $('#btn-out-realclear').bind('click', function() {
+        $('#alert-out').addClass('none');
+        outClearForm();
+        repositoryOutList = [];
+    });
     $('#btn-commodity-clear').bind('click', function() {
         addClearForm();
     });
@@ -51,7 +63,7 @@ $(document).ready(function() {
                     }
                     if (check.flag) {
                         repositoryInList.push(check.repository);
-                        var line = '<tr id="tr-' + check.repository.repositoryid + '">';
+                        var line = '<tr id="tr-in-' + check.repository.repositoryid + '">';
                         line += '<td>' + check.repository.repositoryid + '</td>';
                         line += '<td>' + check.repository.num + '</td>';
                         line += '<td>' + check.repository.costsum + '</td>';
@@ -65,6 +77,39 @@ $(document).ready(function() {
         }
     });
 
+    //添加出库项
+    $('#btn-out-add').bind('click', function() {
+        var check = outCheckForm();
+        if (check.flag) {
+            $.post('/repository/getRepositoryById', { repositoryid: check.repository.repositoryid }, function(res) {
+                if (!res || res.length == 0) {
+                    $('#alert-out').html('商品编号不存在.').removeClass('none');
+                } else if (res[0].num < check.repository.num) {
+                    $('#alert-out').html('商品数量不足.').removeClass('none');
+                } else {
+                    for (let item of repositoryOutList) {
+                        if (item.repositoryid == check.repository.repositoryid) {
+                            check.flag = false;
+                            $('#alert-out').html('商品编号已在出库单中.');
+                            $('#alert-out').removeClass('none');
+                        }
+                    }
+                    if (check.flag) {
+                        repositoryOutList.push(check.repository);
+                        var line = '<tr id="tr-out-' + check.repository.repositoryid + '">';
+                        line += '<td>' + check.repository.repositoryid + '</td>';
+                        line += '<td>' + check.repository.num + '</td>';
+                        line += '<td> <button type="button"class="btn btn-danger btn-sm btn-out-remove" data-id="' + check.repository.repositoryid + '">移除</button></td>';
+                        line += '</tr>';
+                    }
+                    $('#table-out-body').append(line);
+                    outClearInput();
+                }
+            });
+        }
+    });
+
+
     //移除入库项
     $(document).on('click', '.btn-in-remove', function(e) {
         for (i = 0; i < repositoryInList.length; i++) {
@@ -73,7 +118,18 @@ $(document).ready(function() {
                 break;
             }
         }
-        $('#tr-' + e.target.dataset.id).remove();
+        $('#tr-in-' + e.target.dataset.id).remove();
+    });
+
+    //移除出库项
+    $(document).on('click', '.btn-out-remove', function(e) {
+        for (i = 0; i < repositoryOutList.length; i++) {
+            if (repositoryOutList[i].repositoryid == e.target.dataset.id) {
+                repositoryOutList.splice(i, 1);
+                break;
+            }
+        }
+        $('#tr-out-' + e.target.dataset.id).remove();
     });
 
     //确认入库
@@ -96,6 +152,31 @@ $(document).ready(function() {
                     }, 2000);
                 } else if (res.code == 1) {
                     $('#alert-in').html('未知错误!').removeClass('none');
+                }
+            });
+        }
+    });
+
+    //确认出库
+    $('#btn-out-confirm').bind('click', function() {
+        var flag = true;
+        if (repositoryOutList.length == 0) {
+            $('#alert-out').html('出库单不能为空.').removeClass('none');
+            flag = false;
+        }
+        if (flag) {
+            $.post('/repository/outRepository', { list: JSON.stringify(repositoryOutList) }, function(res) {
+                if (res.code == 0) {
+                    $('#modal-repository-out').modal('hide');
+                    outClearForm();
+                    repositoryOutList = [];
+                    getRepositories();
+                    $('#alert-main').html('出库成功!').removeClass('invisible');
+                    setTimeout(() => {
+                        $('#alert-main').addClass('invisible');
+                    }, 2000);
+                } else if (res.code == 1) {
+                    $('#alert-out').html('未知错误!').removeClass('none');
                 }
             });
         }
@@ -198,6 +279,35 @@ function inCheckForm() {
     };
 };
 
+//简单检查出库modal
+function outCheckForm() {
+    var alert = $('#alert-out');
+    var flag = true;
+    alert.addClass('none');
+    var repository = {
+        repositoryid: $('#input-out-id').val(),
+        num: $('#input-out-num').val(),
+        remark: $('#input-out-remark').val()
+    };
+    if (repository.repositoryid.length == 0) {
+        alert.html('请输入商品编号');
+        alert.removeClass('none');
+        flag = false;
+    } else if (repository.num.length == 0) {
+        alert.html('请输入出库数量');
+        alert.removeClass('none');
+        flag = false;
+    } else if (!rePositiveInt.test(repository.num)) {
+        alert.html('商品数量需为正整数');
+        alert.removeClass('none');
+        flag = false;
+    }
+    return {
+        flag: flag,
+        repository: repository
+    };
+};
+
 //简单检查添加商品modal
 function addCheckForm() {
     var alert = $('#alert-commodity-add');
@@ -270,6 +380,11 @@ function inClearForm() {
     $('#table-in-body').html("");
 };
 
+function outClearForm() {
+    outClearInput();
+    $('#table-out-body').html("");
+}
+
 //清空新增商品modal
 function addClearForm() {
     $('#alert-commodity-add').addClass('none');
@@ -285,11 +400,16 @@ function addClearForm() {
 
 //清空入库modal中的input和select
 function inClearInputAndSelect() {
-    $('#alert-in').addClass('none');
     $('#input-id').val("");
     $('#input-num').val("");
     $('#input-costsum').val("");
     $('#input-remark').val("");
+}
+
+function outClearInput() {
+    $('#input-out-id').val("");
+    $('#input-out-num').val("");
+    $('#input-out-remark').val("");
 }
 
 function renderTable(list) {

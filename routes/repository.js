@@ -15,6 +15,8 @@ router.get('/getall', function(req, res) {
     });
 });
 
+
+
 router.post('/getRepositoryById', function(req, response) {
     db.getRepositoryById(req.body.repositoryid, function(detail) {
         response.send(detail);
@@ -26,12 +28,22 @@ router.post('/inRepository', function(req, response) {
     var code = 0;
     var list = JSON.parse(req.body.list);
 
-    if (list.length == 0) code = 1;
+    if (!list || list.length == 0) code = 1;
     if (code == 0) {
         db.inRepositoryList(list);
     }
     response.send({ code: code });
 });
+
+router.post('/outRepository', function(req, response) {
+    //0:入库成功,1:未知错误,2:商品数量不足
+    var code = 0;
+    var list = JSON.parse(req.body.list);
+    console.log(list);
+    if (!list || list.length == 0) code = 1;
+    if (code == 0) db.outRepositoryList(list);
+    response.send({ code: code });
+})
 
 router.post('/addCommodity', function(req, response) {
     //0:无错误,1:未知错误,2:规格不是正整数,3:商品编号已存在
@@ -39,7 +51,7 @@ router.post('/addCommodity', function(req, response) {
     var iserr = false;
     var commodity = req.body;
     //根据brandid获取brand名称，如果不存在则返回错误
-    db.getBrandById(commodity.brand, function() {
+    db.getBrandById(commodity.brand, function(res) {
         if (res.length) {
             commodity.brand = res[0].brand;
         } else {
@@ -54,7 +66,7 @@ router.post('/addCommodity', function(req, response) {
         //检查内容是否为空
         if (!(commodity.repositoryid.length && commodity.brand.length && commodity.fullname.length && commodity.type.length)) iserr = true;
         //检查内容是否过长
-        if (commodity.repositoryid.length > 12 || commodity.fullname.length > 24 || commodity.type > 24 || commodity.remark > 45 || commodity.width.length > 11 || commodity.height.length > 11 || commodity.num.length > 11) iserr = true;
+        if (commodity.repositoryid.length > 12 || commodity.fullname.length > 24 || commodity.type > 24 || commodity.remark > 45 || commodity.width.length > 11 || commodity.height.length > 11) iserr = true;
         //检查商品编号是否已存在
         db.getRepositoryNumById(commodity.repositoryid, function(num) {
             if (num == 1) {

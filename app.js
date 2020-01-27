@@ -10,6 +10,7 @@ var config = require('./modules/configure');
 var indexRouter = require('./routes/index');
 var repositoryRouter = require('./routes/repository');
 var repositoryInRouter = require('./routes/repository-in');
+var repositoryOutRouter = require('./routes/repository-out');
 var brandsRouter = require('./routes/brands');
 var usersRouter = require('./routes/users');
 var generalRouter = require('./routes/general');
@@ -40,6 +41,7 @@ app.use('/general', generalRouter);
 app.use('/brands', brandsRouter);
 app.use('/repository', repositoryRouter);
 app.use('/repository-in', repositoryInRouter);
+app.use('/repository-out', repositoryOutRouter);
 
 
 // catch 404 and forward to error handler

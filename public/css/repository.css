@@ -21,11 +21,13 @@
     margin-top: 0.75rem;
 }
 
-#btn-in-add {
+#btn-in-add,
+#btn-out-add {
     margin: 0.7rem auto 0.7rem auto;
 }
 
-#btn-in-clear {
+#btn-in-clear,
+#btn-out-clear {
     margin-left: 1.2rem;
 }
 

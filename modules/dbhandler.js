@@ -1,3 +1,7 @@
+/**
+ * @author Debonex
+ * @date 2020年1月27日
+ */
 const mysql = require('mysql');
 const config = require('./configure');
 const cryption = require('./cryption');
@@ -112,7 +116,30 @@ var methods = {
             repository.num + "','" +
             repository.costsum + "','" +
             repository.remark + "')";
+        var sql2 = "update repository set num=num+'" + repository.num +
+            "',costsum=costsum+'" + repository.costsum +
+            "' where repositoryid='" + repository.repositoryid + "'";
         connection.query(sql);
+        connection.query(sql2);
+    },
+    outRepository(repository) {
+        var sql = "insert into repository_out (repositoryid,brand,fullname,type,level,width,height,num_pre,num,num_after,remark) values('" +
+            repository.repositoryid + "','" +
+            repository.brand + "','" +
+            repository.fullname + "','" +
+            repository.type + "','" +
+            repository.level + "','" +
+            repository.width + "','" +
+            repository.height + "','" +
+            repository.numpre + "','" +
+            repository.num + "','" +
+            repository.numafter + "','" +
+            repository.remark + "')";
+        var sql2 = "update repository set costsum=(costsum-costsum*('" + repository.num + "'/num)),num=num-'" + repository.num +
+            "' where repositoryid='" +
+            repository.repositoryid + "'";
+        connection.query(sql);
+        connection.query(sql2);
     },
     inRepositoryList(list) {
         for (let repo of list) {
@@ -122,17 +149,28 @@ var methods = {
                     repository.num = repo.num;
                     repository.costsum = repo.costsum;
                     repository.remark = repo.remark;
-                    var sql = "update repository set num=num+'" + repository.num +
-                        "',costsum=costsum+'" + repository.costsum +
-                        "' where repositoryid='" + repository.repositoryid + "'";
-                    connection.query(sql);
                     methods.inRepository(repository);
                 }
             });
         }
     },
+    outRepositoryList(list) {
+        for (let repo of list) {
+            this.getRepositoryById(repo.repositoryid, function(detail) {
+                if (detail.length != 0) {
+                    var repository = detail[0];
+                    if (repository.num >= repo.num) {
+                        repository.numpre = repository.num;
+                        repository.numafter = repository.num - repo.num;
+                        repository.num = repo.num;
+                        repository.remark = repo.remark;
+                        methods.outRepository(repository);
+                    }
+                }
+            });
+        }
+    },
     addCommodity(commodity) {
-        //新增商品时，数量成本默认为0，时间为当前时间
         var sql = "insert into repository (repositoryid,brand,fullname,type,level,width,height,remark) values('" +
             commodity.repositoryid + "','" +
             commodity.brand + "','" +
@@ -143,6 +181,23 @@ var methods = {
             commodity.height + "','" +
             commodity.remark + "')";
         connection.query(sql);
+    },
+    //repository_in
+    getRepositoryin(callback) {
+        var sql = 'select * from repository_in order by intime desc';
+        connection.query(sql, function(err, result) {
+            console.log(result);
+            if (err) console.error(err.stack);
+            else callback(result);
+        })
+    },
+    //repository_out
+    getRepositoryout(callback) {
+        var sql = "select * from repository_out order by outtime desc";
+        connection.query(sql, function(err, result) {
+            if (err) console.error(err.stack);
+            else callback(result);
+        });
     }
 };
 

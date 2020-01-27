@@ -4,11 +4,13 @@ block body
   body
     .navigator
       .navigator-item
+        a(href="/general")#a-general 首页
+      .navigator-item
         a(href="/repository")#a-repository 仓库管理
       .navigator-item
         a(href="/repository-in")#a-repository-in 入库明细
       .navigator-item
-        a(href='#')#a-repository-out 出库明细
+        a(href='/repository-out')#a-repository-out 出库明细
     .secondary-navigator
       block secondary-navigator
     block content

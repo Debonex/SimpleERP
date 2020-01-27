@@ -3,7 +3,7 @@ extends layout-navigator
 block links
     link(rel="stylesheet", href="css/tables.css")
     link(rel="stylesheet", href="css/repository.css")
-    script(src="js/repository-in.js")
+    script(src="js/repository-out.js")
 
 block content
     #main-container
@@ -18,9 +18,9 @@ block content
                         th 型号
                         th 等级
                         th 规格
-                        th 入库数量
-                        th 成本均价
-                        th 成本金额
-                        th 入库时间
+                        th 出库前数量
+                        th 出库数量
+                        th 出库后数量
+                        th 出库时间
                         th 备注
                 tbody#table-body
