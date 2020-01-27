@@ -9,6 +9,10 @@
     width: 90%;
 }
 
+#btn-group-secondary {
+    margin-left: 1.2rem;
+}
+
 .modal {
     top: 5%;
 }

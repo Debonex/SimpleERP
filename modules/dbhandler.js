@@ -55,6 +55,20 @@ var methods = {
             }
         })
     },
+    getBrandByName(brand, callback) {
+        var sql = "select * from brands where brand = '" + brand + "'";
+        connection.query(sql, function(err, result) {
+            if (err) {
+                console.error(err.stack);
+            } else {
+                callback(result);
+            }
+        })
+    },
+    addBrand(brand) {
+        var sql = "insert into brands (brand) values('" + brand + "')";
+        connection.query(sql);
+    },
     //repository
     getRepositorys(callback) {
         var sql = 'select * from repository';

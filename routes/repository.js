@@ -19,12 +19,18 @@ router.post('/getRepositoryById', function(req, response) {
     db.getRepositoryById(req.body.repositoryid, function(detail) {
         response.send(detail);
     });
-})
+});
 
 router.post('/inRepository', function(req, response) {
+    //0:入库成功，1：未知错误
+    var code = 0;
     var list = JSON.parse(req.body.list);
-    db.inRepositoryList(list);
-    response.send('ok');
+
+    if (list.length == 0) code = 1;
+    if (code == 0) {
+        db.inRepositoryList(list);
+    }
+    response.send({ code: code });
 });
 
 router.post('/addCommodity', function(req, response) {
@@ -63,6 +69,22 @@ router.post('/addCommodity', function(req, response) {
         });
     });
 
-})
+});
+
+router.post('/addBrand', function(req, response) {
+    var code = 0; //0:succ,1:err,2:品牌名已存在
+    var brand = req.body.brand;
+    if (!brand || brand.length == 0 || brand.length > 45) code = 1;
+    if (code == 0) {
+        db.getBrandByName(brand, function(res) {
+            if (res.length > 0) {
+                code = 2;
+            } else {
+                db.addBrand(brand);
+            }
+            response.send({ code: code });
+        });
+    }
+});
 
 module.exports = router;

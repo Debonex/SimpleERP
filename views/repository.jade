@@ -5,12 +5,15 @@ block links
     link(rel="stylesheet", href="css/repository.css")
     script(src="js/repository.js")
 
+block secondary-navigator
+    .btn-group
+        button.btn.btn-primary.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
+        button.btn.btn-primary.btn-sm 出库
+    .btn-group#btn-group-secondary
+        button.btn.btn-primary.btn-sm#btn-commodity-add(data-toggle='modal',data-target='#modal-commodity-add',data-backdrop='static') 添加商品
+        button.btn.btn-primary.btn-sm#btn-brand-add(data-toggle='modal',data-target='#modal-brand-add',data-backdrop='static') 添加品牌
+
 block content
-    .secondary-navigator
-        .btn-group
-            button.btn.btn-primary.btn-sm#btn-commodity-add(data-toggle='modal',data-target='#modal-commodity-add',data-backdrop='static') 添加商品
-            button.btn.btn-primary.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
-            button.btn.btn-primary.btn-sm 出库
     #main-container
         .alert.alert-success.invisible#alert-main
         .table-container
@@ -109,3 +112,20 @@ block content
                     button.btn.btn-secondary.close-commodity-add(type='button',data-dismiss='modal') 取消
                     button.btn.btn-secondary(type='button')#btn-commodity-clear 清空
                     button.btn.btn-primary(type='button')#btn-commodity-confirm 确认
+    //- 添加品牌modal
+    .modal#modal-brand-add(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5.modal-title 添加品牌
+                    button.close.close-brand-add(type='button',data-dismiss='modal',aria-label='Close')
+                        span &times
+                .modal-body
+                    .alert.alert-warning.none#alert-brand-add
+                    .input-group
+                        .input-group-prepend
+                            .input-group-text.fa.fa-gears
+                        input.form-control#input-brand(type='text',placeholder='品牌名称')
+                .modal-footer
+                    button.btn.btn-secondary.close-brand-add(type='button',data-dismiss='modal') 取消
+                    button.btn.btn-primary#btn-brand-confirm(type='button') 确认

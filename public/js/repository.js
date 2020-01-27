@@ -9,18 +9,17 @@ $(document).ready(function() {
     getRepositories();
 
     //获取所有的品牌信息
-    $.get('/brands/getall', {}, function(res) {
-        for (let brand of res) {
-            $('#select-commodity-brand').append('<option value="' + brand.id + '">' + brand.brand + '</option>');
-        }
-    }, 'json');
+    getBrands();
 
     //关闭modal
     $('.close-commodity-add').bind('click', function() {
         addClearForm();
     });
 
-
+    $('.close-brand-add').bind('click', function() {
+        $('#input-brand').val("");
+        $('#alert-brand-add').addClass('none');
+    });
 
     //清空modal
     $('#btn-in-clear').bind('click', function() {
@@ -60,6 +59,7 @@ $(document).ready(function() {
                         line += '</tr>';
                     }
                     $('#table-in-body').append(line);
+                    inClearInputAndSelect();
                 }
             });
         }
@@ -84,9 +84,19 @@ $(document).ready(function() {
             flag = false;
         }
         if (flag) {
-            console.log(repositoryInList);
             $.post('/repository/inRepository', { list: JSON.stringify(repositoryInList) }, function(res) {
-                console.log(res);
+                if (res.code == 0) {
+                    $('#modal-repository-in').modal('hide');
+                    inClearForm();
+                    repositoryInList = [];
+                    getRepositories();
+                    $('#alert-main').html('入库成功!').removeClass('invisible');
+                    setTimeout(() => {
+                        $('#alert-main').addClass('invisible');
+                    }, 2000);
+                } else if (res.code == 1) {
+                    $('#alert-in').html('未知错误!').removeClass('none');
+                }
             });
         }
     });
@@ -118,6 +128,35 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    //确认添加品牌
+    $('#btn-brand-confirm').bind('click', function() {
+        var brand = $('#input-brand').val();
+        $('#alert-brand-add').addClass('none');
+        if (brand.length == 0) {
+            $('#alert-brand-add').html('品牌名称不能为空!').removeClass('none');
+            return;
+        }
+        if (brand.length > 12) {
+            $('#alert-brand-add').html('品牌名称不能超过12位!').removeClass('none');
+            return;
+        }
+        $.post('/repository/addBrand', { brand: brand }, function(res) {
+            if (res.code == 0) {
+                $('#modal-brand-add').modal('hide');
+                $('#input-brand').val("");
+                $('#alert-main').removeClass('invisible').html('添加品牌成功!');
+                setTimeout(() => {
+                    $('#alert-main').addClass('invisible');
+                }, 2000);
+                getBrands();
+            } else if (res.code == 1) {
+                $('#alert-brand-add').html('未知错误!').removeClass('none');
+            } else if (res.code == 2) {
+                $('#alert-brand-add').html('品牌名已存在!').removeClass('none')
+            }
+        });
     });
 });
 
@@ -268,7 +307,7 @@ function renderTable(list) {
         table += '<td>' + item.level + '</td>';
         table += '<td>' + item.width + '*' + item.height + '</td>';
         table += '<td>' + item.num + '</td>';
-        table += '<td>' + (item.num == 0 ? '0' : item.costsum / item.num) + '</td>';
+        table += '<td>' + (item.num == 0 ? '0' : (item.costsum / item.num).toFixed(2)) + '</td>';
         table += '<td>' + item.costsum + '</td>';
         table += '<td>' + formatDate(item.intime) + '</td>';
         table += '<td>' + item.remark + '</td>';
@@ -285,5 +324,14 @@ function renderTable(list) {
 function getRepositories() {
     $.get('/repository/getall', {}, function(res) {
         renderTable(res);
+    }, 'json');
+}
+
+function getBrands() {
+    $.get('/brands/getall', {}, function(res) {
+        $('#select-commodity-brand').html("");
+        for (let brand of res) {
+            $('#select-commodity-brand').append('<option value="' + brand.id + '">' + brand.brand + '</option>');
+        }
     }, 'json');
 }
