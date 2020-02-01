@@ -63,8 +63,18 @@ a:hover {
     background-color: #57a2c7;
 }
 
-@media screen and (max-device-width: 576px) {
-    html {
-        width: min-content;
-    }
+
+/* table */
+
+.table-container tbody tr:hover {
+    background-color: dimgray!important;
+}
+
+.table-container td,
+.table-container th {
+    max-width: 8rem;
+}
+
+.table-container td:last-child {
+    max-width: 20rem;
 }

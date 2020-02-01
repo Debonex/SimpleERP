@@ -1,0 +1,30 @@
+extends layout-navigator
+
+block links
+    link(rel="stylesheet", href="css/sale.css")
+    script(src="js/jquery.print.min.js")
+    script(src="js/sale.js")
+
+block navigator-secondary
+    nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.navigator-secondary.flex-row
+        .btn-group#btn-group-first
+            button.btn.btn-outline-info.btn-sm#btn-note-add(data-toggle='modal',data-target='#modal-note-add',data-backdrop='static') 新建销售单
+
+block content
+    .container-fluid
+        .modal#modal-note-add
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h5.modal-title 销售单
+                        button.close.close-note-add(type='button',data-dismiss='modal',aria-label='Close')
+                            span &times;
+                    .modal-body
+                        .alert.alert-warning.none#alert-note-add
+                        .input-group
+                            .input-group-prepend
+                    .modal-footer
+                        button.btn.btn-danger#btn-note-add-realclear(type='button') 清空销售单
+                        button.btn.btn-secondary.close-note-add(type='button',data-dismiss='modal') 取消
+                        button.btn.btn-primary#btn-note-add-print(type='button') 打印
+                        button.btn.btn-primary#btn-note-add-confirm(type='button') 提交

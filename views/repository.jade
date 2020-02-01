@@ -1,18 +1,24 @@
 extends layout-navigator
 
 block links
-    link(rel="stylesheet", href="css/tables.css")
     link(rel="stylesheet", href="css/repository.css")
     script(src="js/repository.js")
 
 block navigator-secondary
     nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.navigator-secondary.flex-row  
-        .btn-group
-            button.btn.btn-primary.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
-            button.btn.btn-primary.btn-sm#btn-out(data-toggle='modal',data-target='#modal-repository-out',data-backdrop='static') 出库
-        .btn-group#btn-group-secondary
-            button.btn.btn-primary.btn-sm#btn-commodity-add(data-toggle='modal',data-target='#modal-commodity-add',data-backdrop='static') 添加商品
-            button.btn.btn-primary.btn-sm#btn-brand-add(data-toggle='modal',data-target='#modal-brand-add',data-backdrop='static') 添加品牌
+        .btn-group#btn-group-first
+            button.btn.btn-outline-info.btn-sm#btn-in(data-toggle='modal',data-target='#modal-repository-in',data-backdrop='static') 入库
+            button.btn.btn-outline-info.btn-sm#btn-out(data-toggle='modal',data-target='#modal-repository-out',data-backdrop='static') 出库
+            button.btn.btn-outline-info.btn-sm#btn-commodity-add(data-toggle='modal',data-target='#modal-commodity-add',data-backdrop='static') 添加商品
+            button.btn.btn-outline-info.btn-sm#btn-brand-add(data-toggle='modal',data-target='#modal-brand-add',data-backdrop='static') 添加品牌
+        .dropdown
+            button.btn.btn-outline-info.btn-sm#btn-sort(data-toggle="dropdown") 排序
+            .dropdown-menu
+                a.dropdown-item#a-sort-intime(href="#") 按时间排序
+                a.dropdown-item#a-sort-brand(href="#") 按品牌排序
+        button.btn.btn-outline-info.btn-sm#btn-search 搜索
+        input.form-control.ml-sm-2#input-search(placeholder="搜索关键词")
+        
 
 block content
     #main-container
@@ -30,7 +36,7 @@ block content
                         th 数量
                         th 成本均价
                         th 成本金额
-                        th 最后变更时间
+                        th 最后出/入库时间
                         th 备注
                 tbody#table-body
     
@@ -42,7 +48,7 @@ block content
                 .modal-header
                     h5.modal-title 入库单
                     button.close.close-in(type='button',data-dismiss='modal',aria-label='Close')
-                        span &times
+                        span &times;
                 .modal-body
                     .alert.alert-warning.none#alert-in
                     .input-group
@@ -81,7 +87,7 @@ block content
                 .modal-header
                     h5.modal-title 出库单
                     button.close.close-out(type='button',data-dismiss='modal',aria-label='Close')
-                        span &times
+                        span &times;
                 .modal-body
                     .alert.alert-warning.none#alert-out
                     .input-group
@@ -115,7 +121,7 @@ block content
                 .modal-header
                     h5.modal-title 新增商品
                     button.close.close-commodity-add(type='button',data-dismiss='modal',aria-label='Close')
-                        span &times
+                        span &times;
                 .modal-body
                     .alert.alert-warning.none#alert-commodity-add
                     .input-group
@@ -124,7 +130,6 @@ block content
                         select.custom-select#select-commodity-brand
                             option(selected) 选择品牌
                         select.cutom-select#select-commodity-level
-                            option(selected) 选择等级
                             option(value='0') 优
                             option(value='1') 良
                     .input-group
@@ -155,7 +160,7 @@ block content
                 .modal-header
                     h5.modal-title 添加品牌
                     button.close.close-brand-add(type='button',data-dismiss='modal',aria-label='Close')
-                        span &times
+                        span &times;
                 .modal-body
                     .alert.alert-warning.none#alert-brand-add
                     .input-group

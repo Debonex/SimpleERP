@@ -14,6 +14,8 @@ var repositoryOutRouter = require('./routes/repository-out');
 var brandsRouter = require('./routes/brands');
 var usersRouter = require('./routes/users');
 var generalRouter = require('./routes/general');
+var saleRouter = require('./routes/sale');
+var proceedsRouter = require('./routes/proceeds');
 
 
 var app = express();
@@ -42,6 +44,8 @@ app.use('/brands', brandsRouter);
 app.use('/repository', repositoryRouter);
 app.use('/repository-in', repositoryInRouter);
 app.use('/repository-out', repositoryOutRouter);
+app.use('/sale', saleRouter)
+app.use('/proceeds', proceedsRouter);
 
 
 // catch 404 and forward to error handler

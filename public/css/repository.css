@@ -1,16 +1,28 @@
 #main-container {
-    margin: 3rem 0rem;
+    margin: 2rem 0rem;
     display: flex;
     flex-flow: column;
     align-items: center;
 }
 
-#table-container {
+.table-container {
     width: 90%;
 }
 
-#btn-group-secondary {
+#btn-group-first {
+    margin-left: 4rem;
+}
+
+#btn-sort {
     margin-left: 1.2rem;
+}
+
+#input-search {
+    max-width: 14rem;
+}
+
+#btn-search {
+    margin-left: 3.6rem;
 }
 
 .modal {
@@ -34,17 +46,20 @@
 #alert-main {
     position: fixed;
     top: 0.5rem;
-    z-index: 1001;
+    z-index: 1999;
 }
 
 
 /* 屏幕宽度小于400px的适配样式 */
 
-@media screen and (max-device-width: 576px) {
+@media screen and (max-device-width: 678px) {
+    html {
+        width: max-content;
+    }
     #main-container {
         width: max-content;
     }
-    #table-container {
+    .table-container {
         width: 100%;
     }
     .modal {
