@@ -7,6 +7,12 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
+router.get('/getAgents', function(req, response) {
+    db.getAgents(function(res) {
+        response.send(res);
+    });
+});
+
 router.post('/login', function(req, res) {
     var user = {
         username: req.body.username,

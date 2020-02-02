@@ -1,3 +1,26 @@
 #btn-note-add {
     margin-left: 4rem;
 }
+
+.modal .input-group {
+    margin-top: 0.75rem;
+}
+
+#btn-note-add-add,
+#btn-note-add-clear {
+    margin: 0.7rem auto 0.7rem auto;
+}
+
+#btn-note-add-clear {
+    margin-left: 1.2rem;
+}
+
+.modal hr {
+    margin: 0.7rem auto 0.7rem auto;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 800px;
+    }
+}

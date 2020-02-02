@@ -38,6 +38,13 @@ var methods = {
             }
         });
     },
+    getAgents(callback) {
+        var sql = "select id,username from users where priority=0 order by id";
+        connection.query(sql, function(err, result) {
+            if (err) console.error(err.stack);
+            else callback(result);
+        })
+    },
     //brands
     getBrands(callback) {
         var sql = 'select * from brands';
@@ -156,7 +163,8 @@ var methods = {
     },
     outRepositoryList(list) {
         for (let repo of list) {
-            this.getRepositoryById(repo.repositoryid, function(detail) {
+            console.log(repo);
+            methods.getRepositoryById(repo.repositoryid, function(detail) {
                 if (detail.length != 0) {
                     var repository = detail[0];
                     if (repository.num >= repo.num) {
@@ -198,6 +206,55 @@ var methods = {
             if (err) console.error(err.stack);
             else callback(result);
         });
+    },
+    //sale
+    addSale(sale, callback) {
+        var sql = "insert into sale (agent_id,client_id,department,remark) values('" +
+            sale.info.agent + "','" +
+            sale.info.clientId + "','" +
+            sale.info.department + "','" +
+            sale.info.remark + "')";
+        connection.query(sql, function(err, res) {
+            if (err) console.error(err.stack);
+            else {
+                for (let item of sale.list) {
+                    methods.getRepositoryById(item.repositoryid, function(detail) {
+                        if (detail.length != 0) {
+                            var repo = detail[0];
+                            let sql2 = "insert into sale_item (saleid,repositoryid,brand,fullname,type,level,width,height,sale_num,unitprice,remark) values('" +
+                                res.insertId + "','" +
+                                repo.repositoryid + "','" +
+                                repo.brand + "','" +
+                                repo.fullname + "','" +
+                                repo.type + "','" +
+                                repo.level + "','" +
+                                repo.width + "','" +
+                                repo.height + "','" +
+                                item.num + "','" +
+                                item.unitprice + "','" +
+                                item.remark + "')";
+                            connection.query(sql2);
+                        }
+                    });
+                }
+            }
+        });
+        callback();
+    },
+    //client
+    getClientByNameAndPhone(name, phone, callback) {
+        var sql = "select * from client where client_name='" + name + "' and client_phone='" + phone + "'";
+        connection.query(sql, function(err, result) {
+            if (err) console.error(err.stack);
+            else callback(result);
+        });
+    },
+    addClient(clientName, clientPhone, callback) {
+        var sql = "insert into client (client_name,client_phone) values('" +
+            clientName + "','" +
+            clientPhone + "')";
+        connection.query(sql);
+        callback();
     }
 };
 

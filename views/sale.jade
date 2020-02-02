@@ -12,6 +12,7 @@ block navigator-secondary
 
 block content
     .container-fluid
+        .alert.alert-success.invisible#alert-main
         .modal#modal-note-add
             .modal-dialog
                 .modal-content
@@ -21,8 +22,64 @@ block content
                             span &times;
                     .modal-body
                         .alert.alert-warning.none#alert-note-add
+                        h6.modal-title 商品信息
                         .input-group
                             .input-group-prepend
+                                .input-group-text.fa.fa-gears &emsp;商品编号
+                            input.form-control#input-note-add-repositoryid(type='text',placeholder='商品编号')
+                        .input-group
+                            .input-group-prepend
+                                .input-group-text.fa.fa-sort-numeric-asc &emsp;销售数量(片)
+                            input.form-control#input-note-add-salenum(type='text',placeholder='销售数量(片)')
+                            .input-group-append
+                                .input-group-text.fa.fa-shopping-basket &emsp;销售单价(元)
+                            input.form-control#input-note-add-unitprice(type='text',placeholder='销售单价(元)')
+                        .input-group
+                            .input-group-prepend
+                                .input-group-text.fa.fa-reorder &emsp;备注
+                            input.form-control#input-note-add-remark(type='text',placeholder='备注')
+                        button.btn.btn-primary(type='button')#btn-note-add-add 添加商品
+                        button.btn.btn-secondary(type='button')#btn-note-add-clear 清空
+                        table.table
+                            thead
+                                tr
+                                    th 商品编号
+                                    th 商品名称
+                                    th 单价(元)
+                                    th 数量(片)
+                                    th 总金额(元)
+                                    th 操作
+                            tbody#table-note-add-body
+                            tfoot
+                                tr 
+                                    th 小计
+                                    th
+                                    th
+                                    th#total-note-add-salenum 0
+                                    th#total-note-add-price 0
+                                    th
+                        hr
+                        .alert.alert-warning.none#alert-note-add-2
+                        h6.modal-title 基本信息
+                        .input-group
+                            .input-group-prepend
+                                .input-group-text.fa.fa-user &emsp;客户姓名
+                            input.form-control#input-note-add-clientName(type='text',placeholder='客户姓名')
+                            .input-group-append
+                                .input-group-text.fa.fa-phone &emsp;联系方式
+                            input.form-control#input-note-add-clientPhone(type='text',placeholder='联系方式')
+                        .input-group
+                            .input-group-prepend
+                                .input-group-text.fa.fa-reorder &emsp;销售单位
+                            input.form-control#input-note-add-department(type='text',placeholder='销售单位')
+                            .input-group-append
+                                .input-group-text.fa.fa-user &emsp;经手人
+                            select.custom-select#select-note-add-agent
+                                option(selected) 经手人
+                        .input-group
+                            .input-group-prepend
+                                .input-group-text.fa.fa-reorder &emsp;摘要
+                            input.form-control#input-note-add-remark-total(type='text',placeholder='摘要')
                     .modal-footer
                         button.btn.btn-danger#btn-note-add-realclear(type='button') 清空销售单
                         button.btn.btn-secondary.close-note-add(type='button',data-dismiss='modal') 取消

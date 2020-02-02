@@ -39,7 +39,6 @@ router.post('/outRepository', function(req, response) {
     //0:入库成功,1:未知错误,2:商品数量不足
     var code = 0;
     var list = JSON.parse(req.body.list);
-    console.log(list);
     if (!list || list.length == 0) code = 1;
     if (code == 0) db.outRepositoryList(list);
     response.send({ code: code });
@@ -76,7 +75,6 @@ router.post('/addCommodity', function(req, response) {
             else if (code == 0) {
                 db.addCommodity(commodity);
             }
-            console.log(commodity);
             response.send({ code });
         });
     });
