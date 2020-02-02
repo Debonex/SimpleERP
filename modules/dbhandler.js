@@ -214,7 +214,7 @@ var methods = {
         });
     },
     getSalesTable(callback) {
-        var sql = "select s.saleid as saleId,u.username as agent,c.client_name as clientName,s.department as department,s.sale_time as saleTime,s.remark as remark " +
+        var sql = "select s.saleid as saleId,u.username as agent,c.client_name as clientName,c.client_phone as clientPhone,s.department as department,s.sale_time as saleTime,s.remark as remark " +
             "from sale as s,users as u,client as c " +
             "where s.agent_id=u.id and s.client_id=c.client_id";
         connection.query(sql, function(err, result) {

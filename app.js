@@ -16,6 +16,7 @@ var usersRouter = require('./routes/users');
 var generalRouter = require('./routes/general');
 var saleRouter = require('./routes/sale');
 var proceedsRouter = require('./routes/proceeds');
+var clientRouter = require('./routes/client');
 
 
 var app = express();
@@ -46,6 +47,7 @@ app.use('/repository-in', repositoryInRouter);
 app.use('/repository-out', repositoryOutRouter);
 app.use('/sale', saleRouter)
 app.use('/proceeds', proceedsRouter);
+app.use('/client', clientRouter);
 
 
 // catch 404 and forward to error handler

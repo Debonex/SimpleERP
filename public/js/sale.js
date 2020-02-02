@@ -137,6 +137,7 @@ function renderTable(list) {
         table += '<td>' + item.saleId + '</td>';
         table += '<td>' + item.agent + '</td>';
         table += '<td>' + item.clientName + '</td>';
+        table += '<td>' + item.clientPhone + '</td>';
         table += '<td>' + item.department + '</td>';
         table += '<td>' + formatDate(item.saleTime) + '</td>';
         table += '<td>' + item.remark + '</td>';
@@ -144,7 +145,7 @@ function renderTable(list) {
     }
     for (i = count; i < maxcount; i++) {
         table += '<tr>';
-        for (j = 0; j < 6; j++) table += '<td></td>';
+        for (j = 0; j < 7; j++) table += '<td></td>';
         table += '</tr>';
     }
     $('#table-body').html(table);

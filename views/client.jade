@@ -1,0 +1,21 @@
+extends layout-navigator
+
+block links
+    link(rel="stylesheet", href="css/client.css")
+    script(src="js/client.js")
+
+block content
+    .container-fluid
+        .alert.alert-success.invisible#alert-main
+        .table-container            
+            table.table.table-striped
+                thead
+                    tr
+                        th 客户编号
+                        th 客户名
+                        th 联系方式
+                        th 单位
+                        th 职业
+                        th 性别
+                        th 年龄
+                tbody#table-body
