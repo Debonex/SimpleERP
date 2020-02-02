@@ -163,7 +163,6 @@ var methods = {
     },
     outRepositoryList(list) {
         for (let repo of list) {
-            console.log(repo);
             methods.getRepositoryById(repo.repositoryid, function(detail) {
                 if (detail.length != 0) {
                     var repository = detail[0];
@@ -194,7 +193,6 @@ var methods = {
     getRepositoryin(callback) {
         var sql = 'select * from repository_in order by intime desc';
         connection.query(sql, function(err, result) {
-            console.log(result);
             if (err) console.error(err.stack);
             else callback(result);
         })
@@ -208,6 +206,22 @@ var methods = {
         });
     },
     //sale
+    getSales(callback) {
+        var sql = "select * from sale";
+        connection.query(sql, function(err, result) {
+            if (err) console.error(err.stack);
+            else callback(result);
+        });
+    },
+    getSalesTable(callback) {
+        var sql = "select s.saleid as saleId,u.username as agent,c.client_name as clientName,s.department as department,s.sale_time as saleTime,s.remark as remark " +
+            "from sale as s,users as u,client as c " +
+            "where s.agent_id=u.id and s.client_id=c.client_id";
+        connection.query(sql, function(err, result) {
+            if (err) console.error(err.stack);
+            else callback(result);
+        });
+    },
     addSale(sale, callback) {
         var sql = "insert into sale (agent_id,client_id,department,remark) values('" +
             sale.info.agent + "','" +
@@ -248,6 +262,13 @@ var methods = {
             if (err) console.error(err.stack);
             else callback(result);
         });
+    },
+    getClientById(id, callback) {
+        var sql = "select * from client where client_id='" + id + "'";
+        connection.query(sql, function(err, result) {
+            if (err) console.error(err.stack);
+            else callback(result);
+        })
     },
     addClient(clientName, clientPhone, callback) {
         var sql = "insert into client (client_name,client_phone) values('" +

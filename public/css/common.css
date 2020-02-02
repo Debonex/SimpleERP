@@ -66,6 +66,11 @@ a:hover {
 
 /* table */
 
+.table-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
 .table-container tbody tr:hover {
     background-color: dimgray!important;
 }
@@ -77,4 +82,10 @@ a:hover {
 
 .table-container td:last-child {
     max-width: 20rem;
+}
+
+@media screen and (max-device-width: 678px) {
+    .table-container {
+        width: 100%;
+    }
 }

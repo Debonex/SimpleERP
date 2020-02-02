@@ -11,6 +11,8 @@ $(document).ready(function() {
     var noteAddList = [];
     $('#a-sale').addClass('active');
 
+    getSales();
+
     //获取经手人信息
     getAgents();
 
@@ -97,6 +99,7 @@ $(document).ready(function() {
                 $('#table-note-add-body').html("");
                 noteAddList = [];
                 noteAddTotal(noteAddList);
+                getSales();
                 $('#alert-main').html('销售单添加成功!').removeClass('invisible');
                 setTimeout(() => {
                     $('#alert-main').addClass('invisible');
@@ -115,6 +118,36 @@ function getAgents() {
             $('#select-note-add-agent').append('<option value="' + agent.id + '">' + agent.username + '</option>');
         }
     });
+}
+
+function getSales() {
+    $.get('/sale/getSalesTable', {}, function(res) {
+        renderTable(res);
+    });
+}
+
+function renderTable(list) {
+    var i;
+    var count = 0;
+    const maxcount = 30;
+    var table = '';
+    for (let item of list) {
+        count++;
+        table += '<tr>';
+        table += '<td>' + item.saleId + '</td>';
+        table += '<td>' + item.agent + '</td>';
+        table += '<td>' + item.clientName + '</td>';
+        table += '<td>' + item.department + '</td>';
+        table += '<td>' + formatDate(item.saleTime) + '</td>';
+        table += '<td>' + item.remark + '</td>';
+        table += '</tr>';
+    }
+    for (i = count; i < maxcount; i++) {
+        table += '<tr>';
+        for (j = 0; j < 6; j++) table += '<td></td>';
+        table += '</tr>';
+    }
+    $('#table-body').html(table);
 }
 
 function noteAddTotal(list) {

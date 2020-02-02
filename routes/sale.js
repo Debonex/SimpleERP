@@ -10,6 +10,18 @@ router.get('/', function(req, res, next) {
     res.render('sale', { title: '销售出库' });
 });
 
+router.get('/getSales', function(req, response) {
+    db.getSales(function(res) {
+        response.send(res);
+    });
+});
+
+router.get('/getSalesTable', function(req, response) {
+    db.getSalesTable(function(list) {
+        response.send(list);
+    });
+});
+
 // const noteAddMessages = ['',
 //     '未知错误', '请输入商品编号', '请选择经手人',
 //     '请输入销售数量', '请输入单价', '请输入销售单位',

@@ -5,10 +5,6 @@
     align-items: center;
 }
 
-.table-container {
-    width: 90%;
-}
-
 #btn-group-first {
     margin-left: 4rem;
 }
@@ -58,9 +54,6 @@
     }
     #main-container {
         width: max-content;
-    }
-    .table-container {
-        width: 100%;
     }
     .modal {
         top: 0;
